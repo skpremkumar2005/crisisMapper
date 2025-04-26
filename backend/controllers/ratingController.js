@@ -6,7 +6,7 @@ const VolunteerProfile = require('../models/VolunteerProfile');
 // @route   POST /api/ratings
 // @access  Private (Civilian who requested help, or Admin)
 const submitRating = async (req, res) => {
-    const { responseId, rating, comment, photoProofUrl } = req.body;
+    const { responseId, rating, comment, photoProofUrl ,location,crisis} = req.body;
     const raterUserId = req.user._id;
 
     try {
@@ -43,7 +43,9 @@ const submitRating = async (req, res) => {
             ratedVolunteer: response.volunteer, // Get volunteer ID from the response record
             rating,
             comment,
-            photoProofUrl
+            photoProofUrl,
+            location,
+            crisis
         });
 
         await newRating.save();

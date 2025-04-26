@@ -122,8 +122,8 @@ function VolunteerRatingPage() {
       {/* Display Assignment Summary */}
       <div className="mb-6 p-4 border rounded-lg bg-gray-50 shadow-sm">
         <h2 className="text-lg font-semibold mb-2">Assignment Details</h2>
-        <p><strong>Crisis Type:</strong> {responseDetails.crisis?.type || 'N/A'}</p>
-        <p><strong>Location:</strong> {responseDetails.crisis?.address || 'N/A'}</p>
+        <p><strong>Crisis Type:</strong> {responseDetails.crisis?.details || 'N/A'}</p>
+        <p><strong>Location:</strong> {responseDetails.crisis?.location || 'N/A'}</p>
          <p><strong>Date Completed:</strong> {responseDetails.completedAt ? new Date(responseDetails.completedAt).toLocaleString() : 'N/A'}</p>
         <p><strong>Volunteer:</strong> {responseDetails.volunteer?.name || 'N/A'}</p>
       </div>
@@ -139,6 +139,8 @@ function VolunteerRatingPage() {
                 responseId={responseId}
                 ratedVolunteerId={responseDetails.volunteer?._id} // Pass volunteer ID if available
                 onRatingSuccess={handleRatingSuccess} // Pass callback function
+                location={responseDetails.crisis.location}
+                crisis={responseDetails.crisis._id}
             />
         )}
 

@@ -3,7 +3,7 @@ import { FaStar } from 'react-icons/fa'; // Using react-icons for stars: npm ins
 import { toast } from 'react-toastify';
 import api from '../../services/api';
 
-function RatingComponent({ responseId, ratedVolunteerId, onRatingSuccess }) {
+function RatingComponent({ responseId, ratedVolunteerId, onRatingSuccess,location ,crisis}) {
   const [rating, setRating] = useState(0); // 0 means no rating selected yet
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState('');
@@ -49,14 +49,16 @@ function RatingComponent({ responseId, ratedVolunteerId, onRatingSuccess }) {
         responseId,
         rating,
         comment,
-        ratedVolunteer: ratedVolunteerId, // Include if needed by backend
+        location,
+        ratedVolunteer: ratedVolunteerId,
+        crisis // Include if needed by backend
         // photoProofUrl: '...' // If only submitting URL after uploading elsewhere
     };
 
     try {
       // Adjust payload based on whether using FormData or JSON
       const payload = photoProof ? formData : jsonData;
-      const { data } = await api.post('/ratings', payload, config);
+      const { data } = await api.post('/ratings/submit', payload, config);
 
       toast.success('Rating submitted successfully!');
       if (onRatingSuccess) {

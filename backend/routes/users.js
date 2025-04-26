@@ -15,8 +15,8 @@ router.get('/all',async(req,res)=>{
 })
 router.get('/helps',protect,async(req,res)=>{
     try{
-        console.log(1)
-        console.log(req.user)
+        // console.log(1)
+        // console.log(req.user)
         // const user=await User.findById(req.user.id);
         // if(!user)return res.status(400).json("user not found");
         const help=await Response.find({ civilianRequester:req.user._id }).populate({
